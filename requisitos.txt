@@ -1,3 +1,4 @@
 djangorestframework
 mysqlclient
 python-decouple
+django-cors-headers
