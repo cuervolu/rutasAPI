@@ -32,7 +32,7 @@ class Rutas(models.Model):
     fecha = models.DateTimeField(auto_now_add=True)
     origen = models.OneToOneField(Origen, on_delete=models.CASCADE)
     destino = models.OneToOneField(Destino, on_delete=models.CASCADE)
-    pasajero = models.ManyToManyField(Pasajero)
+    pasajero = models.ManyToManyField(Pasajero, related_name='pasajero')
 
     def __str__(self):
         return self.direccion

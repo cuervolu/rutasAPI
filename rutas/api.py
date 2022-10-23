@@ -20,16 +20,22 @@ class RutasViewSet(viewsets.ModelViewSet):
             latitud=ruta_data["destino"]["latitud"], longitud=ruta_data["destino"]["longitud"])
         new_destino.save()
 
-        new_pasajero = Pasajero.objects.create(
-            uid=ruta_data["pasajero"]["uid"])
-        new_destino.save()
 
         new_ruta = Rutas.objects.create(direccion=ruta_data['direccion'],
                                         chofer=ruta_data['chofer'],
-                                        origen=new_origen, destino=new_destino,
-                                        pasajero=new_pasajero)
+                                        origen=new_origen, destino=new_destino)
         new_ruta.save()
+        
+        new_pasajero = Pasajero.objects.create(
+            uid=ruta_data["pasajero"]["uid"])
+    
+        new_ruta.pasajero.add(new_pasajero)
+        
+        new_waypoint = Waypoint.objects.create(latitud=ruta_data["pasajero"]["waypoint"]["latitud"], longitud=ruta_data["pasajero"]["waypoint"]["longitud"])
+        
+        new_pasajero.waypoint.add(new_waypoint)
 
         serializer = RutasSerializer(new_ruta)
 
         return Response(serializer.data)
+

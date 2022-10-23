@@ -21,6 +21,10 @@ class PasajeroSerializer(serializers.ModelSerializer):
         model = Pasajero
         fields = '__all__'
 
+class WayPointSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Waypoint
+        fields = '__all__'
 
 class RutasSerializer(serializers.ModelSerializer):
     origen = OrigenSerializer()
@@ -29,5 +33,7 @@ class RutasSerializer(serializers.ModelSerializer):
         fields = ('__all__')
         read_only_fields = ('fecha',)
         depth = 2
+        
+    
         
     
