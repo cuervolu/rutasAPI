@@ -3,6 +3,6 @@ from .api import RutasViewSet
 
 router = routers.DefaultRouter()
 
-router.register('api/rutas', RutasViewSet, 'rutas')
+router.register(r'api/rutas', RutasViewSet, 'rutas')
 
 urlpatterns = router.urls
