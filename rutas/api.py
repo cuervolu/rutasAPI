@@ -20,20 +20,26 @@ class RutasViewSet(viewsets.ModelViewSet):
             latitud=ruta_data["destino"]["latitud"], longitud=ruta_data["destino"]["longitud"])
         new_destino.save()
 
-        new_ruta = Rutas.objects.create(direccion=ruta_data['direccion'],
-                                        chofer=ruta_data['chofer'],
+        new_vehiculo = Vehiculo.objects.create(
+            marca=ruta_data["chofer"]["vehiculo"]["marca"], anio=ruta_data["chofer"]["vehiculo"]["anio"], modelo=ruta_data["chofer"]["vehiculo"]["modelo"])
+
+        new_chofer = Chofer.objects.create(
+            uid=ruta_data["chofer"]["uid"], vehiculo=new_vehiculo)
+
+        new_ruta = Rutas.objects.create(direccion=ruta_data["direccion"],
+                                        chofer=new_chofer,
                                         origen=new_origen, destino=new_destino)
         new_ruta.save()
 
-        for pasajero in ruta_data['pasajero']:
+        for pasajero in ruta_data["pasajero"]:
             new_pasajero = Pasajero.objects.create(
                 uid=pasajero["uid"])
-            
+
             new_ruta.pasajero.add(new_pasajero)
 
-        for waypoint in ruta_data['pasajero']:
+        for waypoint in ruta_data["pasajero"]:
             new_waypoint = Waypoint.objects.create(
-                latitud=waypoint['waypoint']["latitud"], longitud=waypoint['waypoint']["longitud"])
+                latitud=waypoint["waypoint"]["latitud"], longitud=waypoint["waypoint"]["longitud"])
             new_pasajero.waypoint.add(new_waypoint)
 
         serializer = RutasSerializer(new_ruta)
