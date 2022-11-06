@@ -6,23 +6,26 @@ from django.db import models
 class Origen(models.Model):
     latitud = models.FloatField()
     longitud = models.FloatField()
-
+    def __str__(self):
+        return str(self.latitud) + "," + str(self.longitud) 
 
 class Destino(models.Model):
     latitud = models.FloatField()
     longitud = models.FloatField()
-
+    def __str__(self):
+        return str(self.latitud) + "," + str(self.longitud) 
 
 class Waypoint(models.Model):
     latitud = models.FloatField()
     longitud = models.FloatField()
-
+    def __str__(self):
+        return str(self.latitud) + "," + str(self.longitud) 
 class Vehiculo(models.Model):
     marca = models.CharField(max_length=50)
     anio = models.IntegerField(blank=False, null=False)
     modelo = models.CharField(max_length=50)
     def __str__(self):
-        return self.marca + " " + self.anio + " " + self.modelo
+        return self.marca + " " + str(self.anio) + " " + self.modelo
 
 class Chofer(models.Model):
     uid = models.CharField(max_length=150)
