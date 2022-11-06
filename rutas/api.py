@@ -45,3 +45,10 @@ class RutasViewSet(viewsets.ModelViewSet):
         serializer = RutasSerializer(new_ruta)
 
         return Response(serializer.data)
+
+
+class RutasSearchSet(viewsets.ModelViewSet):
+    serializer_class = RutasSerializer
+    def get_queryset(self):
+        id_ruta = self.kwargs['id']
+        return Rutas.objects.filter(id=id_ruta)
