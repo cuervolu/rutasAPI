@@ -52,3 +52,9 @@ class RutasSearchSet(viewsets.ModelViewSet):
     def get_queryset(self):
         id_ruta = self.kwargs['id']
         return Rutas.objects.filter(id=id_ruta)
+    
+class RutaDeleteSet(viewsets.ModelViewSet):
+    serializer_class = RutasSerializer
+    def get_queryset(self):
+        id_ruta = self.kwargs['id']
+        return Rutas.objects.filter(id=id_ruta).delete()
