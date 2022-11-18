@@ -31,7 +31,10 @@ class UsuarioViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, request, *args, **kwargs):
         params = kwargs
-        user = Usuario.objects.filter(uid=params['pk']).latest('fecha')
+        if(params['pk'].isdigit()): #Verifica si el parámetro de la URL es numérico
+            user = Usuario.objects.filter(id=params['pk']).latest('fecha')
+        else:
+            user = Usuario.objects.filter(uid=params['pk']).latest('fecha')
         serializer = UsuarioSerializer(user)
         return Response(serializer.data)
 
