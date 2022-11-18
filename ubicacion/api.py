@@ -29,6 +29,12 @@ class UsuarioViewSet(viewsets.ModelViewSet):
         id_usuario = self.kwargs['id']
         return Usuario.objects.filter(id=id_usuario).delete()
 
+    def retrieve(self, request, *args, **kwargs):
+        params = kwargs
+        user = Usuario.objects.filter(uid=params['pk']).latest('fecha')
+        serializer = UsuarioSerializer(user)
+        return Response(serializer.data)
+
 
 
 class UsuarioSearchSet(viewsets.ModelViewSet):
