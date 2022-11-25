@@ -12,6 +12,6 @@ class LatLng(models.Model):
 class Usuario(models.Model):
     uid = models.CharField(max_length=150, blank=False, null=False);
     ubicacion = models.ManyToManyField(LatLng, blank=True)
-    fecha = models.DateTimeField(auto_now_add=True)
+    fecha = models.DateTimeField(auto_now=True)
     def __str__(self):
         return self.uid

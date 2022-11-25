@@ -42,7 +42,7 @@ class Pasajero(models.Model):
 class Rutas(models.Model):
     direccion = models.CharField(max_length=500)
     chofer = models.ForeignKey(Chofer, on_delete=models.CASCADE)
-    fecha = models.DateTimeField(auto_now_add=True)
+    fecha = models.DateTimeField(auto_now=True)
     origen = models.OneToOneField(Origen, on_delete=models.CASCADE)
     destino = models.OneToOneField(Destino, on_delete=models.CASCADE)
     pasajero = models.ManyToManyField(Pasajero, related_name='pasajero')
