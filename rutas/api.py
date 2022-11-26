@@ -26,7 +26,9 @@ class RutasViewSet(viewsets.ModelViewSet):
         new_chofer = Chofer.objects.create(
             uid=ruta_data["chofer"]["uid"], vehiculo=new_vehiculo)
 
-        new_ruta = Rutas.objects.create(direccion=ruta_data["direccion"],
+        new_ruta = Rutas.objects.create(direccion=ruta_data["direccion"], 
+                                        precio=ruta_data["precio"], 
+                                        fecha=ruta_data["fecha"],
                                         chofer=new_chofer,
                                         origen=new_origen, destino=new_destino)
         new_ruta.save()
@@ -49,12 +51,15 @@ class RutasViewSet(viewsets.ModelViewSet):
 
 class RutasSearchSet(viewsets.ModelViewSet):
     serializer_class = RutasSerializer
+
     def get_queryset(self):
         id_ruta = self.kwargs['id']
         return Rutas.objects.filter(id=id_ruta)
-    
+
+
 class RutaDeleteSet(viewsets.ModelViewSet):
     serializer_class = RutasSerializer
+
     def get_queryset(self):
         id_ruta = self.kwargs['id']
         return Rutas.objects.filter(id=id_ruta).delete()

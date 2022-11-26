@@ -1,8 +1,6 @@
 from django.db import models
 
 # Create your models here.
-
-
 class Origen(models.Model):
     latitud = models.FloatField()
     longitud = models.FloatField()
@@ -40,12 +38,13 @@ class Pasajero(models.Model):
     def __str__(self):
         return self.uid
 class Rutas(models.Model):
-    direccion = models.CharField(max_length=500)
     chofer = models.ForeignKey(Chofer, on_delete=models.CASCADE)
-    fecha = models.DateTimeField(auto_now=True)
+    pasajero = models.ManyToManyField(Pasajero, related_name='pasajero')
     origen = models.OneToOneField(Origen, on_delete=models.CASCADE)
     destino = models.OneToOneField(Destino, on_delete=models.CASCADE)
-    pasajero = models.ManyToManyField(Pasajero, related_name='pasajero')
+    direccion = models.CharField(max_length=500)
+    precio = models.IntegerField()
+    fecha = models.CharField(max_length=500)
 
     def __str__(self):
         return self.direccion
