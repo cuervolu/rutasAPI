@@ -55,6 +55,7 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8100",
     "http://localhost:8200",
+    'http://localhost',
 ]
 
 
